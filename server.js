@@ -7,17 +7,20 @@ const { makeExecutableSchema } = require('@graphql-tools/schema');
 const { loadFilesSync } = require('@graphql-tools/load-files');
 
 const typesArray = loadFilesSync(path.join(__dirname, '**/*.graphql'));
+const resolversArray = loadFilesSync(path.join(__dirname, "**/*.resolvers.js"));
 
 const schema = makeExecutableSchema({
-    typeDefs: typesArray
+    typeDefs: typesArray,
+    resolvers: resolversArray
 })
 
 // const schema = buildSchema(schemaText); //replaced by makeExecutableSchema
 
-const root = {
-    orders: require('./orders/orders.model'),
-    products: require('./products/products.model'),
-}
+//Replaced by the Resolvers
+// const root = {
+//     orders: require('./orders/orders.model'),
+//     products: require('./products/products.model'),
+// }
 
 PORT = process.env.PORT || 3000;
 
@@ -25,7 +28,7 @@ const app = express();
 
 app.use('/graphql', graphqlHTTP({
     schema: schema,
-    rootValue: root,
+    // rootValue: root, //Resolvers replaced this
     graphiql: true,
 }))
 
