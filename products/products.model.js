@@ -45,14 +45,14 @@ function addNewProduct(id, description, price) {
 
 function createProductReview(id, rating, comment) {
     const product = getProductById(id);
-    const review = {
-        rating, 
-        comment
-    };
-    console.log(product);
-    product.reviews.push(review);
-    console.log(product);
-    return review;
+    if (product) {
+        const review = {
+            rating, 
+            comment
+        };
+        product.reviews.push(review);
+        return review;
+    }
 }   
 
 module.exports = {
