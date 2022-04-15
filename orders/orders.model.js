@@ -17,7 +17,6 @@ const orders = [
 
 
 function getAllOrders() {
-    console.log(orders);
     return orders;
 }
 
